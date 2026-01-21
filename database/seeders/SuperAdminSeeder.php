@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\School;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -15,16 +16,23 @@ class SuperAdminSeeder extends Seeder
      */
     public function run(): void
     {
+        $school = School::firstOrCreate([
+            'name' => 'Main School',
+        ], [
+            'type' => 'school',
+        ]);
+
         $role = Role::firstOrCreate([
-            'name' => 'Super Admin',
-            'guard_name' => 'web'
+            'name' => 'super-admin',
+            'guard_name' => 'web',
         ]);
 
         $user = User::firstOrCreate(
-            ['email' => 'admin2gmail.com'],
+            ['email' => 'admin@gmail.com'],
             [
                 'name' => 'Super Admin',
-                'password' => Hash::make('password')
+                'school_id' => $school->id, // ✅ IMPORTANT
+                'password' => Hash::make('password'),
             ]
         );
 
