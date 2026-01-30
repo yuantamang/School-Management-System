@@ -14,8 +14,6 @@ class StudentInfolist
             ->components([
                 TextEntry::make('user.name')
                     ->label('User'),
-                TextEntry::make('school_id')
-                    ->numeric(),
                 TextEntry::make('section.name')
                     ->label('Section'),
                 TextEntry::make('registration_number'),

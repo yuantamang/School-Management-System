@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Sections\Schemas;
 
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
@@ -11,9 +12,9 @@ class SectionForm
     {
         return $schema
             ->components([
-                TextInput::make('class_id')
-                    ->required()
-                    ->numeric(),
+                Select::make('class_id')
+                    ->relationship('classes','name')
+                    ->required(),
                 TextInput::make('name')
                     ->required(),
             ]);

@@ -11,16 +11,60 @@ use App\Filament\Resources\Enrollments\Schemas\EnrollmentInfolist;
 use App\Filament\Resources\Enrollments\Tables\EnrollmentsTable;
 use App\Models\Enrollment;
 use BackedEnum;
+use Filament\Facades\Filament;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class EnrollmentResource extends Resource
 {
     protected static ?string $model = Enrollment::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+
+    public static function canViewAny(): bool
+    {
+        return Filament::auth()->check() && Filament::auth()->user()?->can('view enrollments') ?? null;
+    }
+
+    public static function canEditAny(): bool
+    {
+        return Filament::auth()->check() && Filament::auth()->user()->can('update enrollments');
+    }
+
+    public static function canCreateAny(): bool
+    {
+        return Filament::auth()->check() && Filament::auth()->user()->can('create enrollments');
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return Filament::auth()->check() && Filament::auth()->user()->can('delete enrollments');
+    }
+
+    public static function canView(Model $record): bool
+    {
+        return auth('web')->user()->can('view classes');
+    }
+
+    public static function canEdit(Model $record): bool
+    {
+        return auth()->user('web')->can('update classes');
+    }
+
+    public static function canDelete(Model $record): bool
+    {
+        return auth()->user('web')->can('delete classes');
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return Filament::auth()->check() && Filament::auth()->user()->can('view enrollments');
+    }
 
     public static function form(Schema $schema): Schema
     {

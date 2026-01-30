@@ -20,9 +20,6 @@ class StudentsTable
             ->columns([
                 TextColumn::make('user.name')
                     ->searchable(),
-                TextColumn::make('school_id')
-                    ->numeric()
-                    ->sortable(),
                 TextColumn::make('section.name')
                     ->searchable(),
                 TextColumn::make('registration_number')

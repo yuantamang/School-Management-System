@@ -1,7 +1,10 @@
-2026_01_20_080445_create_users_table
-2026_01_20_081601_create_permission_tables
-2026_01_20_082405_create_academic_years_table
-2026_01_20_082710_create_subjects_table
-2026_01_20_083102_create_classes_table
-2026_01_20_083437_create_sections_table
-2026_01_20_083556_create_teachers_table
+Super Admin has all access no school id ,
+admin which has its own table have access of everything except roles, permissions, schools and
+no one can see super-admin.
+
+Error:
+    1. Admin is not l0gin in /admin.
+    2. While creating user no school_id is been auto loaded.
+
+Suspicous:
+    1. Adding Auth::user() rather than auth()->user().

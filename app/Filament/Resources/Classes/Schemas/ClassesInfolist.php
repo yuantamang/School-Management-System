@@ -12,8 +12,6 @@ class ClassesInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('school_id')
-                    ->numeric(),
                 TextEntry::make('name'),
                 TextEntry::make('level')
                     ->placeholder('-'),

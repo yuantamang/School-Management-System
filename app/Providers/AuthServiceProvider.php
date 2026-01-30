@@ -7,9 +7,8 @@ use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any authentication / authorization services.
-     */
+    protected $policies = [];
+
     public function boot(): void
     {
         Gate::before(function ($user) {

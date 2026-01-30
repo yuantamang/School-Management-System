@@ -12,8 +12,6 @@ class AcademicYearInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('school_id')
-                    ->numeric(),
                 TextEntry::make('year'),
                 IconEntry::make('is_active')
                     ->boolean(),

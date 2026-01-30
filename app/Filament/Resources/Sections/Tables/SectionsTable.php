@@ -18,9 +18,9 @@ class SectionsTable
     {
         return $table
             ->columns([
-                TextColumn::make('class_id')
-                    ->numeric()
-                    ->sortable(),
+                TextColumn::make('classes.name')
+                    ->sortable()
+                    ->label("Class"),
                 TextColumn::make('name')
                     ->searchable(),
                 TextColumn::make('deleted_at')

@@ -13,6 +13,12 @@ class EditClasses extends EditRecord
 {
     protected static string $resource = ClassesResource::class;
 
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        unset($data['school_id']);
+        return $data;
+    }
+
     protected function getHeaderActions(): array
     {
         return [

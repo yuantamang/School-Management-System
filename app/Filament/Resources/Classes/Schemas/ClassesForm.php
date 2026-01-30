@@ -11,9 +11,6 @@ class ClassesForm
     {
         return $schema
             ->components([
-                TextInput::make('school_id')
-                    ->required()
-                    ->numeric(),
                 TextInput::make('name')
                     ->required(),
                 TextInput::make('level')

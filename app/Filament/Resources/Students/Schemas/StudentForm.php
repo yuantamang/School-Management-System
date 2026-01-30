@@ -14,14 +14,34 @@ class StudentForm
         return $schema
             ->components([
                 Select::make('user_id')
-                    ->relationship('user', 'name')
+                    ->relationship(
+                        name: 'user',
+                        titleAttribute: 'name',
+                        modifyQueryUsing: function ($query){
+                            $user = auth('web')->user();
+
+                            if (!$user->hasRole('super-admin')) {
+                                $query->where('school_id',$user->school_id);
+                            }
+                        }
+                    )
                     ->required(),
-                TextInput::make('school_id')
-                    ->required()
-                    ->numeric(),
                 Select::make('section_id')
-                    ->relationship('section', 'name')
+                    ->relationship(
+                            name: 'section',
+                            titleAttribute: 'name',
+                            modifyQueryUsing: function ($query) {
+                            $user = auth('web')->user();
+
+                            if (!$user->hasRole('super-admin')) {
+                                $query->whereHas('classes', function ($q) use ($user) {
+                                    $q->where('school_id',$user->school_id);
+                                });
+                            }
+                        }
+                    )
                     ->required(),
+
                 TextInput::make('registration_number')
                     ->required(),
                 DatePicker::make('dob')

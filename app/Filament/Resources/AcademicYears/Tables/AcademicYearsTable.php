@@ -16,9 +16,6 @@ class AcademicYearsTable
     {
         return $table
             ->columns([
-                TextColumn::make('school_id')
-                    ->numeric()
-                    ->sortable(),
                 TextColumn::make('year')
                     ->searchable(),
                 IconColumn::make('is_active')

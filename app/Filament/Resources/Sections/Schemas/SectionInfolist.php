@@ -12,8 +12,8 @@ class SectionInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('class_id')
-                    ->numeric(),
+                TextEntry::make('classes.name')
+                    ->label("Class"),
                 TextEntry::make('name'),
                 TextEntry::make('deleted_at')
                     ->dateTime()

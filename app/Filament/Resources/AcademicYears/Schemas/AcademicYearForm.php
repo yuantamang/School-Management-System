@@ -12,9 +12,6 @@ class AcademicYearForm
     {
         return $schema
             ->components([
-                TextInput::make('school_id')
-                    ->required()
-                    ->numeric(),
                 TextInput::make('year')
                     ->required(),
                 Toggle::make('is_active')
