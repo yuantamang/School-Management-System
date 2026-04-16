@@ -24,6 +24,20 @@ class SectionResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
+    public static function getEloquentQuery(): Builder
+    {
+        $query = parent::getEloquentQuery();
+        $user = auth('web')->user();
+
+        if (!$user->hasRole('super-admin')) {
+            $query->whereHas('classes', function ($q) use ($user){
+                $q->where('school_id',$user->school_id);
+            });
+        }
+
+        return $query;
+    }
+
     public static function form(Schema $schema): Schema
     {
         return SectionForm::configure($schema);

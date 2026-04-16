@@ -13,7 +13,16 @@ class SectionForm
         return $schema
             ->components([
                 Select::make('class_id')
-                    ->relationship('classes','name')
+                    ->relationship(
+                        name: 'classes',
+                        titleAttribute: 'name',
+                        modifyQueryUsing: function ($query) {
+                            $user = auth('web')->user();
+                            if (!$user->hasRole('super-admin')) {
+                                $query->where('school_id',$user->school_id);
+                            }
+                        }
+                    )
                     ->required(),
                 TextInput::make('name')
                     ->required(),
